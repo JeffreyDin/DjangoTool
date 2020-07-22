@@ -5,19 +5,20 @@ import {user_service as service_user} from "../service/user";
 import {observer} from "mobx-react";
 import {message} from "antd";
 import 'antd/lib/message/style';
+import {inject} from "../utils";
 
 // const service_user = new UserService();
 
 
-export default class Reg extends React.Component {
-    render() {
-        return <_Reg service_user={service_user} />;
-    }
-};
+// export default class Reg extends React.Component {
+//     render() {
+//         return <_Reg service_user={service_user} />;
+//     }
+// };
 
-
+@inject({service_user})  // {service_user} => service_user=service_user
 @observer
-class _Reg extends React.Component {
+export default class Reg extends React.Component {
     // 工具类，对表单中的数据进行验证后，再进行提交
     validate_pwd(pwd1, pwd2){
         return pwd1.value === pwd2.value;

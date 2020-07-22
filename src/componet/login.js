@@ -5,19 +5,28 @@ import {user_service as service_user} from "../service/user";
 import {observer} from "mobx-react";
 import {message} from "antd";
 import 'antd/lib/message/style';
+import {inject} from "../utils";
 
 // const service_user = new UserService();
 
+// export default class Login extends React.Component {
+//     render() {
+//         return <_Login service_user={service_user}/>;
+//     }
+// };
 
-export default class Login extends React.Component {
-    render() {
-        return <_Login service_user={service_user}/>;
-    }
-};
 
-// 观察者
+// 10，柯里化，替换为箭头函数  *** 整体
+// 无状态组件
+// const inject = obj => Comp => props => <Comp {...obj} {...props} />;
+// // 调用
+// inject(a)(b);
+
+@inject({service_user})  // {service_user} => service_user=service_user
 @observer
-class _Login extends React.Component {
+// class _Login extends React.Component {
+export default class Login extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {ret: 0}
@@ -43,7 +52,7 @@ class _Login extends React.Component {
                 <span style={{color: 'red'}}>ret={this.state.ret}</span>
                 <div className="form">
                     <form className="login-form">
-                        <input type="text" placeholder="邮箱" value="dddddd@gmail.com"/>
+                        <input type="text" placeholder="邮箱" defaultValue="dddddd@gmail.com"/>
                         {/*value={"adbdedc"}*/}
                         <input type="password" placeholder="密码"/>
                         <button onClick={this.handleClick.bind(this)}>登录</button>
