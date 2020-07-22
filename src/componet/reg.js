@@ -3,7 +3,8 @@ import '../css/login.css';
 import {Link, Redirect} from "react-router-dom";
 import {user_service as service_user} from "../service/user";
 import {observer} from "mobx-react";
-
+import {message} from "antd";
+import 'antd/lib/message/style';
 
 // const service_user = new UserService();
 
@@ -27,10 +28,13 @@ class _Reg extends React.Component {
         const [name, email, password, confirm] = event.target.form;
 
         // TODO && name 长度、字符验证； email 正则； password 强度验证；
-        if (this.validate_pwd(password, confirm) )
+        if (this.validate_pwd(password, confirm))
             this.props.service_user.reg(name.value, email.value, password.value);
-        else{
-            console.log("error ~~~~~~~~~~~~~~~~~~~~~~~")
+        else {
+            message.info(
+                this.props.service_user.errMsg = '注册失败',
+                5,
+                () => this.props.service_user.errMsg = '');
         }
     };
 
@@ -40,6 +44,7 @@ class _Reg extends React.Component {
             // 已经注册成功且登录的用户不允许注册
             return <Redirect to={"/"} />;
         }
+        // let err = this.props.service_user.errMsg;
 
         return(
             <div className="login-page">
@@ -57,4 +62,12 @@ class _Reg extends React.Component {
         );
 
     }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (prevProps.service_user.errMsg) {
+    //         message.info(prevProps.service_user.errMsg,
+    //             5,
+    //             () => prevProps.service_user.errMsg = '');
+    //     }
+    // };
 }

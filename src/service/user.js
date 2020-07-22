@@ -9,6 +9,7 @@ store.addPlugin(require('store/plugins/expire'));
 class UserService {
     // + 被观察对象,关注此数据的变化
     @observable loggedin = false;
+    @observable errMsg = ''; // 错误信息
 
 
     login(email, password, obj) {
@@ -31,6 +32,7 @@ class UserService {
             .catch(error => {
                 console.log(2,error);
                 this.loggedin = false;
+                this.errMsg = '用户名或密码错误';
             });
 
     };
@@ -54,6 +56,7 @@ class UserService {
             .catch(error => {
                 console.log(2,error);
                 this.loggedin = false;
+                this.errMsg = '注册失败';
             });
 
     };
