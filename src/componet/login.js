@@ -1,10 +1,10 @@
 import React from 'react';
 import '../css/login.css';
 import {Link, Redirect} from "react-router-dom";
-import UserService from "../service/user";
+import {user_service as service_user} from "../service/user";
 import {observer} from "mobx-react";
 
-const service_user = new UserService();
+// const service_user = new UserService();
 
 
 export default class Login extends React.Component {
@@ -19,7 +19,7 @@ class _Login extends React.Component {
     constructor(props){
         super(props);
         this.state={ret: 0}
-    }
+    };
 
     handleClick(event){
         // 阻止同步提交
@@ -33,6 +33,7 @@ class _Login extends React.Component {
     render() {
         // 使用 this.props.service_user.loggedin
         // + 跳转
+        console.log('_Login', this.props.service_user.loggedin);
         if (this.props.service_user.loggedin) return <Redirect to={"/"} />;
         return(
             <div className="login-page">
