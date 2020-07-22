@@ -2,7 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import Login from "./componet/login";
-import Reg from "./componet/reg";  // 在函数 Root 中添加时登录组件，自动补存
+import Reg from "./componet/reg";
+import Publish from "./componet/blog/publish";
+import List from "./componet/blog/list";
+import {Menu, Icon, Layout} from "antd";
+
+const {Header, Content, Footer} = Layout;
+
+import "antd/lib/menu/style";
+import "antd/lib/icon/style";
 
 
 function Home() {
@@ -26,24 +34,41 @@ class Root extends React.Component {
     render() {
         return (
             <Router>
-                <div>
-                    <div>
-                        <ul>
-                            <li><Link to="/">主页</Link></li>
-                            <li><Link to="/login">登录</Link></li>
-                            <li><Link to="/reg">注册</Link></li>
-                            <li><Link to="/about">关于</Link></li>
-                        </ul>
-                    </div>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/reg" component={Reg}/>
-                    <Route path="/about" component={About}/>
-                </div>
+                <Layout>
+                    <Header>
+                        {/*<div className="logo" />*/}
+                        {/*<Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>*/}
+
+                        <Menu mode="horizontal" theme="dark">
+                            <Menu.Item key="home"><Link to="/"><Icon type={"home"}/>主页</Link></Menu.Item>
+                            <Menu.Item key="login"><Link to="/login"><Icon type={"login"}/>登录</Link></Menu.Item>
+                            <Menu.Item key="reg"><Link to="/reg">注册</Link></Menu.Item>
+                            <Menu.Item key="list"><Link to="/article"><Icon type="bars"/>文章列表</Link></Menu.Item>
+                            <Menu.Item key="publish"><Link to="/article/create">文章发布</Link></Menu.Item>
+
+                            <Menu.Item key="about"><Link to="/about">关于</Link></Menu.Item>
+                        </Menu>
+
+                    </Header>
+                    <Content style={{ padding: '8px 50px' }}>
+                        <div style={{ width:'80%', margin:'auto', padding:'5px'}}>
+                            <Route exact path="/" component={Home}/>
+                            <Route path="/login" component={Login}/>
+                            <Route path="/reg" component={Reg}/>
+                            <Route path="/article" component={List}/>
+                            <Route path="/article/create" component={Publish}/>
+                            <Route path="/about" component={About}/>
+                        </div>
+
+                    </Content>
+                    <Footer style={{textAlign: 'center'}}>
+                        jeffrey.com ©2018 Created by jeffrey
+                    </Footer>
+
+
+                </Layout>
             </Router>);
     }
 }
 
 ReactDOM.render(<Root/>, document.getElementById('root'));
-
-
