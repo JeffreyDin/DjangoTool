@@ -40,8 +40,8 @@ export default class Reg extends React.Component {
     };
 
     render() {
-        console.log('_Reg', this.props.service_user.loggedin);
-        if (this.props.service_user.loggedin){
+        // console.log('_Reg', this.props.service_user.jumpMsg);
+        if (this.props.service_user.jumpMsg){
             // 已经注册成功且登录的用户不允许注册
             return <Redirect to={"/"} />;
         }

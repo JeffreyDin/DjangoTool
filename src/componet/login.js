@@ -42,10 +42,10 @@ export default class Login extends React.Component {
 
 
     render() {
-        // 使用 this.props.service_user.loggedin
+        // 使用 this.props.service_user.jumpMsg
         // + 跳转
-        console.log('_Login', this.props.service_user.loggedin);
-        if (this.props.service_user.loggedin) return <Redirect to={"/"}/>;
+        // console.log('_Login', this.props.service_user.jumpMsg);
+        if (this.props.service_user.jumpMsg) return <Redirect to={"/"}/>;
         let err = this.props.service_user.errMsg;
         return (
             <div className="login-page">

@@ -32,6 +32,8 @@ export default class Publish extends React.Component {
             labelCol: {span: 4},
             wrapperCol: {span: 14},
         };
+        // console.log('Publish', this.props.service_blog.jumpMsg);
+        // if (this.props.service_blog.jumpMsg) return <Redirect to={"/login"}/>;
         let blog = this.props.service_blog.blogMsg;
         return (
             <Form layout={"horizontal"} onSubmit={this.handleSubmit.bind(this)}>

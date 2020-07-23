@@ -8,7 +8,7 @@ store.addPlugin(require('store/plugins/expire'));
 
 class UserService {
     // + 被观察对象,关注此数据的变化
-    @observable loggedin = false;
+    @observable jumpMsg = false;
     @observable errMsg = ''; // 错误信息
 
 
@@ -27,11 +27,11 @@ class UserService {
                 const {token, user} = response.data;
                 // + 存储token,注意需要重开一次chrome的调试窗口才能看到,8小时过期
                 store.set('token', token, new Date().getTime() + 8*3600*1000);
-                this.loggedin = true;
+                this.jumpMsg = true;
             })
             .catch(error => {
                 console.log(2,error);
-                this.loggedin = false;
+                this.jumpMsg = false;
                 this.errMsg = '用户名或密码错误';
             });
 
@@ -51,11 +51,11 @@ class UserService {
                 const {token, user} = response.data;
                 // + 存储token,注意需要重开一次chrome的调试窗口才能看到,8小时过期
                 store.set('token', token, new Date().getTime() + 8*3600*1000);
-                this.loggedin = true;
+                this.jumpMsg = true;
             })
             .catch(error => {
                 console.log(2,error);
-                this.loggedin = false;
+                this.jumpMsg = false;
                 this.errMsg = '注册失败';
             });
 
