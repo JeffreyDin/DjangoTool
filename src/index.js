@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import Login from "./componet/login";
 import Reg from "./componet/reg";
 import Publish from "./componet/blog/publish";
-import List from "./componet/blog/list";
+import ArticleList from "./componet/blog/list";
 import {Menu, Icon, Layout} from "antd";
 
 const {Header, Content, Footer} = Layout;
@@ -55,7 +55,7 @@ class Root extends React.Component {
                             <Route exact path="/" component={Home}/>
                             <Route path="/login" component={Login}/>
                             <Route path="/reg" component={Reg}/>
-                            <Route path="/article" component={List}/>
+                            <Route path="/article" component={ArticleList}/>
                             <Route path="/article/create" component={Publish}/>
                             <Route path="/about" component={About}/>
                         </div>
