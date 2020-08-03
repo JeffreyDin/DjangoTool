@@ -12,11 +12,11 @@ class BlogService {
         });
     }
 
-    // TODO 验证，token 在 store 中是否拿回来过期了，如果过期，清除
     @observable blogMsg = '';
     @observable blogArticles = [];
     @observable blogPagination = {page:1, size:20, count:0, pages:1};
 
+    // TODO 验证，token 在 store 中是否拿回来过期了，如果过期，清除
     getToken() {
         return store.get('token','');
     }
@@ -49,33 +49,20 @@ class BlogService {
                 this.blogMsg = '博客提交失败';
             });
 
-        // this.axios.get(
-        //     'blog/article/create/',
-        //     {headers: {'Jwt': this.getToken()},}
-        // )
-        //     .then((response) => {
-        //         console.log(1, response);
-        //         console.log(2, response.data);
-        //         const {article_id} = response.data;
-        //         this.jumpMsg = false;
-        //         this.blogMsg = '博客提交成功';
-        //     })
-        //     .catch(error => {
-        //         console.log(2, error);
-        //         this.jumpMsg = false;
-        //         this.blogMsg = '博客提交失败';
-        //     });
     };
 
-    list() {
-
-        this.axios.get(
-            'blog/article/',
+    list(search) {
+        // 访问流程：
+        // /article?page=2&size=4 => constructor ?page=2&size=4 =>
+        // service_blog list(?page=2&size=4) => /api/blog/article/?page=2&size=20
+        axios.get('/api/blog/article/'+search,
         )
-            .then((response) => {
+            .then(response => {
                 console.log(1, response);
                 console.log(2, response.data); // articles, pagination
-                const {articles=[], pagination={page:1, size:20, count:0, pages:1}} = response.data;
+                const {articles=[], pagination={}} = response.data;
+                // const {articles, pagination} = response.data;
+
                 this.blogArticles = articles;
                 this.blogPagination = pagination;
             })
@@ -84,8 +71,6 @@ class BlogService {
 
                 this.blogMsg = '博客列表获取失败';
             });
-
-
     };
 
 }
