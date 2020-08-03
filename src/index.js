@@ -8,6 +8,11 @@ import ArticleList from "./componet/blog/list";
 import ArticleDetail from "./componet/blog/detail";
 import {Menu, Icon, Layout} from "antd";
 
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/es/locale-provider/zh_CN';
+
+// import { ConfigProvider } from 'antd';
+
 const {Header, Content, Footer} = Layout;
 
 import "antd/lib/menu/style";
@@ -58,7 +63,7 @@ class Root extends React.Component {
                             <Route path="/login" component={Login}/>
                             <Route path="/reg" component={Reg}/>
                             <Route path="/article/list" component={ArticleList}/>
-                            <Route path="/article/detail" component={ArticleDetail}/>
+                            <Route path="/article/detail/:id" component={ArticleDetail}/>
                             <Route path="/article/create" component={Publish}/>
                             <Route path="/about" component={About}/>
                         </div>
@@ -74,4 +79,9 @@ class Root extends React.Component {
     }
 }
 
-ReactDOM.render(<Root/>, document.getElementById('root'));
+// ReactDOM.render(<Root/>, document.getElementById('root'));
+
+// Now
+ReactDOM.render(<LocaleProvider locale={zh_CN}><Root /></LocaleProvider>,document.getElementById('root'));
+// Newer
+// ReactDOM.render(  <ConfigProvider {...yourConfig}><Root /></ConfigProvider>,document.getElementById('root'));
