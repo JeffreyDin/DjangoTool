@@ -15,6 +15,7 @@ class BlogService {
     @observable blogMsg = '';
     @observable blogArticles = [];
     @observable blogPagination = {page:1, size:20, count:0, pages:1};
+    @observable blogDetail = {};
 
     // TODO 验证，token 在 store 中是否拿回来过期了，如果过期，清除
     getToken() {
@@ -70,6 +71,24 @@ class BlogService {
                 console.log(2, error);
 
                 this.blogMsg = '博客列表获取失败';
+            });
+    };
+
+    detail(id) {
+        // 访问流程：
+        // /article/detail/2 => constructor 2 =>
+        // service_blog detail(2) => /api/blog/article/detail/2
+        axios.get('/api/blog/article/detail/'+id,
+        )
+            .then(response => {
+                console.log(1, response);
+                console.log(2, response.data); // articles, pagination
+                this.blogDetail = response.data.article;
+            })
+            .catch(error => {
+                console.log(2, error);
+
+                this.blogMsg = '博客内容详情获取失败';
             });
     };
 
